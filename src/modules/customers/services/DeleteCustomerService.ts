@@ -15,9 +15,7 @@ class DeleteCustomerService {
     private customersRepository: ICustomerRepository,
   ) {}
   public async handle({ id }: IRequest) {
-    const customersRepository = getCustomRepository(CustomerRepository);
-
-    const customer = await customersRepository.findById(id);
+    const customer = await this.customersRepository.findById(id);
 
     if (!customer) {
       throw new AppError('Customer not found.');

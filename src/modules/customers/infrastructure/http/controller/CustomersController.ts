@@ -4,18 +4,22 @@ import DeleteCustomerService from '../../../services/DeleteCustomerService';
 import ListCustomerService from '../../../services/ListCustomerService';
 import ShowCustomerService from '../../../services/ShowCustomerService';
 import UpdateCustomerService from '../../../services/UpdateCustomerService';
+import { container } from 'tsyringe';
 
 class CustomersController {
   public async index(request: Request, response: Response): Promise<Response> {
-    const listCustomers = new ListCustomerService();
-    const customers = await listCustomers.handle();
+    const page = request.query.page ? Number(request.query.page) : 1;
+    const limit = request.query.limit ? Number(request.query.limit) : 15;
+    const listCustomers = container.resolve(ListCustomerService);
+
+    const customers = await listCustomers.handle({ page, limit });
 
     return response.json(customers);
   }
 
   public async show(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
-    const showCustomer = new ShowCustomerService();
+    const showCustomer = container.resolve(ShowCustomerService);
 
     const customer = await showCustomer.handle({ id });
 
@@ -24,7 +28,7 @@ class CustomersController {
 
   public async create(request: Request, response: Response): Promise<Response> {
     const { name, email } = request.body;
-    const createCustomers = new CreateCustomerService();
+    const createCustomers = container.resolve(CreateCustomerService);
 
     const customer = await createCustomers.handle({ name, email });
 
@@ -35,7 +39,7 @@ class CustomersController {
     const { id } = request.params;
     const { name, email } = request.body;
 
-    const updateCustomer = new UpdateCustomerService();
+    const updateCustomer = container.resolve(UpdateCustomerService);
     const customer = await updateCustomer.handle({ id, name, email });
 
     return response.json(customer);
@@ -44,7 +48,7 @@ class CustomersController {
   public async delete(request: Request, response: Response): Promise<Response> {
     const { id } = request.params;
 
-    const deleteCustomer = new DeleteCustomerService();
+    const deleteCustomer = container.resolve(DeleteCustomerService);
 
     await deleteCustomer.handle({ id });
 

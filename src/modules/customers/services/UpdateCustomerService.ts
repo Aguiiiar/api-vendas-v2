@@ -1,8 +1,6 @@
 import AppError from '@shared/infrastructure/http/errors/AppError';
 import { inject, injectable } from 'tsyringe';
-import { getCustomRepository } from 'typeorm';
 import Customer from '../infrastructure/typeorm/entities/Customer';
-import CustomerRepository from '../infrastructure/typeorm/repositories/CustomerRepository';
 import { ICustomerRepository } from '../domain/repositories/ICustomerRepository';
 
 interface IRequest {
