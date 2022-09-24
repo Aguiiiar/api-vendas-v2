@@ -6,6 +6,7 @@ import cors from 'cors';
 import routes from './routes';
 import AppError from './errors/AppError';
 import '@shared/typeorm';
+import '@shared/container';
 import { errors } from 'celebrate';
 import uploadConfig from '@config/upload';
 import logger from '@shared/lib/logger';
