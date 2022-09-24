@@ -1,4 +1,4 @@
-import logger from '@lib/logger';
+import logger from '@shared/lib/logger';
 import app from './app';
 const port = process.env.PORT;
 

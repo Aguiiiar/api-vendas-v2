@@ -1,8 +1,8 @@
-import AppError from '@shared/http/errors/AppError';
+import AppError from '@shared/infrastructure/http/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import Order from '../typeorm/entities/Order';
-import { OrdersRepository } from '../typeorm/repositories/OrdersRepository';
-import CustomerRepository from '../../customers/typeorm/repositories/CustomerRepository';
+import Order from '../infrastructure/typeorm/entities/Order';
+import { OrdersRepository } from '../infrastructure/typeorm/repositories/OrdersRepository';
+import CustomerRepository from '../../customers/infrastructure/typeorm/repositories/CustomerRepository';
 import { ProductRepository } from '../../products/typeorm/repositories/ProductRepository';
 
 interface IProduct {

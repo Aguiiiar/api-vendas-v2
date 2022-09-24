@@ -1,7 +1,7 @@
-import CustomersController from '@modules/customers/controller/CustomersController';
-import isAuthenticated from '@shared/http/middlewares/isAuthenticated';
+import CustomersController from '../controller/CustomersController';
 import { celebrate, Joi, Segments } from 'celebrate';
 import { Router } from 'express';
+import isAuthenticated from '@shared/infrastructure/http/middlewares/isAuthenticated';
 
 const customerRoutes = Router();
 const customerController = new CustomersController();

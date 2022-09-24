@@ -4,11 +4,11 @@ import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes';
-import AppError from '@shared/http/errors/AppError';
+import AppError from './errors/AppError';
 import '@shared/typeorm';
 import { errors } from 'celebrate';
 import uploadConfig from '@config/upload';
-import logger from '@lib/logger';
+import logger from '@shared/lib/logger';
 import { pagination } from 'typeorm-pagination';
 import rateLimiter from './middlewares/rateLimiter';
 
