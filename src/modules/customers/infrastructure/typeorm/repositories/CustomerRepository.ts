@@ -1,8 +1,12 @@
 import { EntityRepository, Repository } from 'typeorm';
 import Customer from '../entities/Customer';
+import { ICustomerRepository } from '@modules/customers/domain/repositories/ICustomerRepository';
 
 @EntityRepository(Customer)
-class CustomerRepository extends Repository<Customer> {
+class CustomerRepository
+  extends Repository<Customer>
+  implements ICustomerRepository
+{
   public async findById(id: string): Promise<Customer | undefined> {
     const customer = await this.findOne({
       where: {
