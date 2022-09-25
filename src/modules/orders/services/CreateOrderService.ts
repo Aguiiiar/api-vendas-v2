@@ -3,7 +3,9 @@ import { getCustomRepository } from 'typeorm';
 import Order from '../infrastructure/typeorm/entities/Order';
 import { OrdersRepository } from '../infrastructure/typeorm/repositories/OrdersRepository';
 import CustomerRepository from '../../customers/infrastructure/typeorm/repositories/CustomerRepository';
-import { ProductRepository } from '../../products/infrastructure/typeorm/repositories/ProductRepository';
+import { ProductRepository } from '../../products/infrastructure/typeorm/repositories/ProductsRepository';
+import { inject, injectable } from 'tsyringe';
+import { IOrdersRepository } from '../domain/repositories/IOrderRepository';
 
 interface IProduct {
   id: string;
@@ -14,14 +16,14 @@ interface IRequest {
   customer_id: string;
   products: IProduct[];
 }
-
+@injectable()
 class CreateOrderService {
+  constructor(
+    @inject('OrdersRepository')
+    private ordersRepository: IOrdersRepository,
+  ) {}
   public async handle({ customer_id, products }: IRequest): Promise<Order> {
-    const ordersRepository = getCustomRepository(OrdersRepository);
-    const customerRepository = getCustomRepository(CustomerRepository);
-    const productsRepository = getCustomRepository(ProductRepository);
-
-    const customerExists = await customerRepository.findById(customer_id);
+    const customerExists = await this.ordersRepository.findById(customer_id);
 
     if (!customerExists) {
       throw new AppError('Could not find any customer with the given id.');

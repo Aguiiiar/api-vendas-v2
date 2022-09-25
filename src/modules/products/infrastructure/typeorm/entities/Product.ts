@@ -1,5 +1,6 @@
 import OrdersProducts from '@modules/orders/infrastructure/typeorm/entities/OrdersProducts';
 import { IProduct } from '../../../domain/models/IProduct';
+import { IOrderProducts } from '../../../../orders/domain/models/IOrderProduct';
 import {
   Column,
   CreateDateColumn,
@@ -15,7 +16,7 @@ class Product implements IProduct {
   id: string;
 
   @OneToMany(() => OrdersProducts, order_product => order_product.product)
-  order_product: OrdersProducts[];
+  order_product: IOrderProducts[];
   @Column('varchar')
   name: string;
 

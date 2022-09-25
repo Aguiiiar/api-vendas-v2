@@ -1,6 +1,6 @@
 import AppError from '@shared/infrastructure/http/errors/AppError';
 import { getCustomRepository } from 'typeorm';
-import { ProductRepository } from '../infrastructure/typeorm/repositories/ProductRepository';
+import { ProductRepository } from '../infrastructure/typeorm/repositories/ProductsRepository';
 import RedisCache from '@shared/cache/redisCache';
 
 class DeleteProductService {

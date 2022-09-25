@@ -5,6 +5,6 @@ export interface IProduct {
   name: string;
   price: number;
   quantity: number;
-  created_at: number;
-  updated_at: number;
+  created_at: Date;
+  updated_at: Date;
 }
