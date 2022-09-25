@@ -1,5 +1,6 @@
 import Customer from '@modules/customers/infrastructure/typeorm/entities/Customer';
 import {
+  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
@@ -9,11 +10,16 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import OrdersProducts from './OrdersProducts';
+import { IOrder } from '@modules/orders/domain/models/IOrder';
+import { ICreateOrderProducts } from '@modules/orders/domain/models/ICreateOrderProducts';
 
 @Entity('orders')
-class Order {
+class Order implements IOrder {
   @PrimaryGeneratedColumn('uuid')
   id: string;
+
+  @Column('int')
+  order: number;
 
   @ManyToOne(() => Customer)
   @JoinColumn({ name: 'customer_id' })

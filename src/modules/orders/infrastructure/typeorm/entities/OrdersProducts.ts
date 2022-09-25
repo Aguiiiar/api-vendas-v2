@@ -1,4 +1,6 @@
-import Product from '@modules/products/typeorm/entities/Product';
+import { IOrderProducts } from '@modules/orders/domain/models/IOrderProduct';
+import { IProduct } from '@modules/products/domain/models/IProduct';
+import Product from '@modules/products/infrastructure/typeorm/entities/Product';
 import {
   Column,
   CreateDateColumn,
@@ -11,7 +13,7 @@ import {
 import Order from './Order';
 
 @Entity('orders_products')
-class OrdersProducts {
+class OrdersProducts implements IOrderProducts {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -19,9 +21,15 @@ class OrdersProducts {
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @ManyToOne(() => Product, product => product.order_product)
+  @ManyToOne(() => Product, product => product.order_products)
   @JoinColumn({ name: 'product_id' })
   product: Product;
+
+  @Column()
+  order_id: string;
+
+  @Column()
+  product_id: string;
 
   @Column('decimal')
   price: number;
