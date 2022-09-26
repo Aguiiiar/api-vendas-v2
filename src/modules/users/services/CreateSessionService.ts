@@ -5,6 +5,8 @@ import { sign } from 'jsonwebtoken';
 import User from '../infrastructure/typeorm/entities/User';
 import UsersRepository from '../infrastructure/typeorm/repositories/UsersRepository';
 import authConfig from '@config/auth';
+import { inject, injectable } from 'tsyringe';
+import { IUserRepository } from '../domain/repositories/IUserRepository';
 
 interface IRequest {
   email: string;
@@ -16,10 +18,14 @@ interface IResponse {
   token: string;
 }
 
+@injectable()
 class CreateSessionService {
+  constructor(
+    @inject('UserRepository')
+    private usersRepository: IUserRepository,
+  ) {}
   public async handle({ email, password }: IRequest): Promise<IResponse> {
-    const usersRepository = getCustomRepository(UsersRepository);
-    const user = await usersRepository.findByEmail(email);
+    const user = await this.usersRepository.findByEmail(email);
 
     if (!user) {
       throw new AppError('Incorrect email/password combination', 401);
