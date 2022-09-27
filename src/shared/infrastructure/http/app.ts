@@ -5,7 +5,7 @@ import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import routes from './routes';
 import AppError from './errors/AppError';
-import '@shared/typeorm';
+import '@shared/infrastructure/typeorm';
 import '@shared/container';
 import { errors } from 'celebrate';
 import uploadConfig from '@config/upload';
