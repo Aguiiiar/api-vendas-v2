@@ -22,7 +22,7 @@ container.registerSingleton<IOrdersRepository>(
 );
 
 container.registerSingleton<IProductsRepository>(
-  'ProductRepository',
+  'ProductsRepository',
   ProductsRepository,
 );
 

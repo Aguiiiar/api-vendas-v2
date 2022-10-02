@@ -15,8 +15,8 @@ class Product implements IProduct {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @OneToMany(() => OrdersProducts, order_product => order_product.product)
-  order_product: IOrderProducts[];
+  @OneToMany(() => OrdersProducts, order_products => order_products.product)
+  order_product: OrdersProducts[];
   @Column('varchar')
   name: string;
 

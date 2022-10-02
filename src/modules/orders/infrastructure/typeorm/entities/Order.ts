@@ -11,7 +11,6 @@ import {
 } from 'typeorm';
 import OrdersProducts from './OrdersProducts';
 import { IOrder } from '@modules/orders/domain/models/IOrder';
-import { ICreateOrderProducts } from '@modules/orders/domain/models/ICreateOrderProducts';
 
 @Entity('orders')
 class Order implements IOrder {

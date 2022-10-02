@@ -1,5 +1,4 @@
 import { IOrderProducts } from '@modules/orders/domain/models/IOrderProduct';
-import { IProduct } from '@modules/products/domain/models/IProduct';
 import Product from '@modules/products/infrastructure/typeorm/entities/Product';
 import {
   Column,
@@ -21,7 +20,7 @@ class OrdersProducts implements IOrderProducts {
   @JoinColumn({ name: 'order_id' })
   order: Order;
 
-  @ManyToOne(() => Product, product => product.order_products)
+  @ManyToOne(() => Product, product => product.order_product)
   @JoinColumn({ name: 'product_id' })
   product: Product;
 

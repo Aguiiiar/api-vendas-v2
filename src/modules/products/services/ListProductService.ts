@@ -14,7 +14,7 @@ class ListProductService {
     private productsRepository: IProductsRepository,
   ) {}
 
-  public async execute({
+  public async handle({
     page,
     limit,
   }: SearchParams): Promise<IProductPaginate> {
